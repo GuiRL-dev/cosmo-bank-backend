@@ -1,4 +1,4 @@
-﻿package com.cosmobank.api.domain.entity;
+package com.cosmobank.api.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,13 +21,13 @@ public class ReportEntity {
     @GeneratedValue
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "reported_id", nullable = false)
+    @JoinColumn(name = "reported_id")
     private UserEntity reportedUser;
     @ManyToOne
-    @JoinColumn(name = "whistleblower_id", nullable = false)
+    @JoinColumn(name = "whistleblower_id")
     private UserEntity whistleblowerUser;
     @ManyToOne
-    @JoinColumn(name = "origin_transaction_id", nullable = false)
+    @JoinColumn(name = "origin_transaction_id")
     private TransactionEntity originTransaction;
     private String reason;
     private String description;

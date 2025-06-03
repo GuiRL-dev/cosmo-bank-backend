@@ -1,4 +1,4 @@
-﻿package com.cosmobank.api.domain.repository;
+package com.cosmobank.api.domain.repository;
 
 import com.cosmobank.api.domain.entity.ReportEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

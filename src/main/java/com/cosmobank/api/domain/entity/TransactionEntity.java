@@ -1,4 +1,4 @@
-﻿package com.cosmobank.api.domain.entity;
+package com.cosmobank.api.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

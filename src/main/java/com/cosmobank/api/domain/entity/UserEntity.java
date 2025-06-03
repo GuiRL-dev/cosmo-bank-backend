@@ -1,4 +1,4 @@
-﻿package com.cosmobank.api.domain.entity;
+package com.cosmobank.api.domain.entity;
 
 
 import jakarta.persistence.Entity;
@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -29,8 +30,9 @@ public class UserEntity {
     private String cpf;
     private String email;
     private Integer number;
-    private Integer balance;
-    private Integer score;
+    private BigDecimal balance;
+    private Integer general_score;
+    private Integer bank_score;
     private Date update_date;
     private Date creation_date;
     private Boolean cpf_key_pix;

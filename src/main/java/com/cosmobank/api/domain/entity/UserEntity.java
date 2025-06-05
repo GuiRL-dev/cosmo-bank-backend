@@ -35,7 +35,7 @@ public class UserEntity {
     private Integer bank_score;
     private Date update_date;
     private Date creation_date;
-    private String imageUrl;
+    private String image_filename;
     private Boolean cpf_key_pix;
     private Boolean email_key_pix;
     private Boolean number_key_pix;

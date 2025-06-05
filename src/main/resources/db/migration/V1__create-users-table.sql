@@ -12,7 +12,7 @@ CREATE TABLE users (
     bank_score INTEGER NOT NULL,
     update_date TIMESTAMP NOT NULL,
     creation_date TIMESTAMP NOT NULL,
-    imageUrl VARCHAR(100),
+    image_filename VARCHAR(100),
     cpf_key_pix BOOLEAN NOT NULL,
     email_key_pix BOOLEAN NOT NULL,
     number_key_pix BOOLEAN NOT NULL

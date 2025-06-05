@@ -9,11 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
 
@@ -35,11 +32,6 @@ public class AuthService {
 
     public ResponseEntity registerUser(RegisterRequestDTO body){
         Optional<UserEntity> user = this.userRepository.findByEmail(body.email());
-        String imageUrl = null;
-
-        if(body.image() != null){
-            imageUrl = this.uploadImg(body.image());
-        }
 
         if(user.isEmpty()){
             UserEntity newUserEntity = new UserEntity();
@@ -53,7 +45,7 @@ public class AuthService {
             newUserEntity.setBank_score(500);
             newUserEntity.setUpdate_date(new Date(body.date()));
             newUserEntity.setCreation_date(new Date(body.date()));
-            newUserEntity.setImageUrl(imageUrl);
+            newUserEntity.setImage_filename("");
             newUserEntity.setCpf_key_pix(false);
             newUserEntity.setEmail_key_pix(false);
             newUserEntity.setNumber_key_pix(false);
@@ -63,10 +55,6 @@ public class AuthService {
             return ResponseEntity.ok(new ResponseDTO(newUserEntity.getName(), token));
         }
         return ResponseEntity.badRequest().body("Email already exists in database");
-    }
-
-    private String uploadImg(MultipartFile multipartFile){
-        return "";
     }
 
 }

@@ -9,10 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -33,6 +35,11 @@ public class AuthService {
 
     public ResponseEntity registerUser(RegisterRequestDTO body){
         Optional<UserEntity> user = this.userRepository.findByEmail(body.email());
+        String imageUrl = null;
+
+        if(body.image() != null){
+            imageUrl = this.uploadImg(body.image());
+        }
 
         if(user.isEmpty()){
             UserEntity newUserEntity = new UserEntity();
@@ -44,8 +51,9 @@ public class AuthService {
             newUserEntity.setBalance(new BigDecimal("0"));
             newUserEntity.setGeneral_score(500);
             newUserEntity.setBank_score(500);
-            newUserEntity.setUpdate_date(actualTimestamp());
-            newUserEntity.setCreation_date(actualTimestamp());
+            newUserEntity.setUpdate_date(new Date(body.date()));
+            newUserEntity.setCreation_date(new Date(body.date()));
+            newUserEntity.setImageUrl(imageUrl);
             newUserEntity.setCpf_key_pix(false);
             newUserEntity.setEmail_key_pix(false);
             newUserEntity.setNumber_key_pix(false);
@@ -57,10 +65,8 @@ public class AuthService {
         return ResponseEntity.badRequest().body("Email already exists in database");
     }
 
-    public Timestamp actualTimestamp(){
-        Instant now = Instant.now();
-        Timestamp timestamp = Timestamp.from(now);
-        return timestamp;
+    private String uploadImg(MultipartFile multipartFile){
+        return "";
     }
 
 }

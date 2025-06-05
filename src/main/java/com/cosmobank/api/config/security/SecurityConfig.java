@@ -1,4 +1,4 @@
-package com.cosmobank.api.infra.security;
+package com.cosmobank.api.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

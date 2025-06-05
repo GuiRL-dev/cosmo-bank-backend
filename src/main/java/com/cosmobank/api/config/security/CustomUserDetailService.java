@@ -1,4 +1,4 @@
-package com.cosmobank.api.infra.security;
+package com.cosmobank.api.config.security;
 
 import com.cosmobank.api.domain.entity.UserEntity;
 import com.cosmobank.api.domain.repository.UserRepository;

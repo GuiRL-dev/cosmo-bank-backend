@@ -1,4 +1,4 @@
-package com.cosmobank.api.infra.cors;
+package com.cosmobank.api.config.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

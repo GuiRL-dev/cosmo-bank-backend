@@ -1,4 +1,4 @@
-package com.cosmobank.api.service;
+package com.cosmobank.api.domain.service;
 
 import org.springframework.stereotype.Service;
 

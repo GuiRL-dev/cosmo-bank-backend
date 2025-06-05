@@ -25,10 +25,10 @@ public class UserEntity {
     @Id
     @GeneratedValue
     private UUID id;
-
     private String name;
     private String cpf;
     private String email;
+    private String password;
     private Integer number;
     private BigDecimal balance;
     private Integer general_score;

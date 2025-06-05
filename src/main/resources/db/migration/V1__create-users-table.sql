@@ -6,7 +6,7 @@ CREATE TABLE users (
     password VARCHAR(100) NOT NULL,
     cpf VARCHAR(11) UNIQUE NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    number INTEGER UNIQUE NOT NULL,
+    number VARCHAR(11) UNIQUE NOT NULL,
     balance NUMERIC(19, 2) NOT NULL,
     general_score INTEGER NOT NULL,
     bank_score INTEGER NOT NULL,

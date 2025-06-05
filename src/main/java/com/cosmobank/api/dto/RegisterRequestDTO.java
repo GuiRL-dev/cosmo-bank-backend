@@ -1,4 +1,4 @@
 package com.cosmobank.api.dto;
 
-public record RegisterRequestDTO(String name, String cpf, Integer number, String email, String password) {
+public record RegisterRequestDTO(String name, String cpf, String number, String email, String password) {
 }

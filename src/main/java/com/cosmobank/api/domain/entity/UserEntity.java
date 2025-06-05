@@ -29,7 +29,7 @@ public class UserEntity {
     private String cpf;
     private String email;
     private String password;
-    private Integer number;
+    private String number;
     private BigDecimal balance;
     private Integer general_score;
     private Integer bank_score;

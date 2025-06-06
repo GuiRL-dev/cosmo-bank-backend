@@ -21,7 +21,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
-    public ResponseEntity loginUser(LoginRequestDTO body) {
+    public ResponseEntity<ResponseDTO> loginUser(LoginRequestDTO body) {
         UserEntity userEntity = this.userRepository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
         if (passwordEncoder.matches(body.password(), userEntity.getPassword())) {
             String token = this.tokenService.generateToken(userEntity);
@@ -30,7 +30,7 @@ public class AuthService {
         return ResponseEntity.badRequest().build();
     }
 
-    public ResponseEntity registerUser(RegisterRequestDTO body){
+    public ResponseEntity<?> registerUser(RegisterRequestDTO body){
         Optional<UserEntity> user = this.userRepository.findByEmail(body.email());
 
         if(user.isEmpty()){

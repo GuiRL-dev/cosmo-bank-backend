@@ -1,6 +1,5 @@
 package com.cosmobank.api.domain.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -14,29 +13,20 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
-@Table(name = "users")
+@Table(name = "bank_score")
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+public class BankScoreEntity {
 
     @Id
     @GeneratedValue
     private UUID id;
-    private String name;
-    private String cpf;
-    private String email;
-    private String password;
-    private String number;
-    private BigDecimal balance;
-    private Integer general_score;
-    private Integer bank_score;
-    private Date update_date;
-    private Date creation_date;
-    private String image_filename;
-    private Boolean cpf_key_pix;
-    private Boolean email_key_pix;
-    private Boolean number_key_pix;
+    private UUID user_id;
+    private String reason;
+    private BigDecimal changed_value;
+    private Date timestamp;
+
 }

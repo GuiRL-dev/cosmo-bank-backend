@@ -4,7 +4,7 @@ import com.cosmobank.api.domain.entity.UserEntity;
 import com.cosmobank.api.domain.repository.UserRepository;
 import com.cosmobank.api.dto.LoginRequestDTO;
 import com.cosmobank.api.dto.RegisterRequestDTO;
-import com.cosmobank.api.dto.ResponseDTO;
+import com.cosmobank.api.dto.TokenResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,11 +21,11 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
-    public ResponseEntity<ResponseDTO> loginUser(LoginRequestDTO body) {
+    public ResponseEntity<TokenResponseDTO> loginUser(LoginRequestDTO body) {
         UserEntity userEntity = this.userRepository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
         if (passwordEncoder.matches(body.password(), userEntity.getPassword())) {
             String token = this.tokenService.generateToken(userEntity);
-            return ResponseEntity.ok(new ResponseDTO(userEntity.getName(), token));
+            return ResponseEntity.ok(new TokenResponseDTO(userEntity.getId(), token));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -52,7 +52,7 @@ public class AuthService {
             this.userRepository.save(newUserEntity);
 
             String token = this.tokenService.generateToken(newUserEntity);
-            return ResponseEntity.ok(new ResponseDTO(newUserEntity.getName(), token));
+            return ResponseEntity.ok(new TokenResponseDTO(newUserEntity.getId(), token));
         }
         return ResponseEntity.badRequest().body("Email already exists in database");
     }

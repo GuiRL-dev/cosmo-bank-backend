@@ -42,7 +42,7 @@ public class AuthService {
             newUserEntity.setNumber(body.number());
             newUserEntity.setBalance(new BigDecimal("0"));
             newUserEntity.setGeneral_score(500);
-            newUserEntity.setBank_score(500);
+            newUserEntity.setBank_score(700);
             newUserEntity.setUpdate_date(new Date(body.date()));
             newUserEntity.setCreation_date(new Date(body.date()));
             newUserEntity.setImage_filename("");

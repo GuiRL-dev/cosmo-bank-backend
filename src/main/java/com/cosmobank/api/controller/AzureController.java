@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/cosmo-server")
@@ -21,9 +22,9 @@ public class AzureController {
     private final UserRepository userRepository;
 
     @PutMapping("/upload-image")
-    public ResponseEntity<String> uploadImage(@RequestParam("imageFile") MultipartFile imageFile, String email){
+    public ResponseEntity<String> uploadImage(@RequestParam("imageFile") MultipartFile imageFile, UUID userId){
         try{
-            UserEntity userEntity = this.userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+            UserEntity userEntity = this.userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
             String fileName = azureBlobStorageService.upload(imageFile, userEntity.getName());
             userEntity.setImage_filename(fileName);
             this.userRepository.save(userEntity);

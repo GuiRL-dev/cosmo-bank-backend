@@ -1,9 +1,6 @@
 package com.cosmobank.api.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +20,9 @@ public class GeneralScoreEntity {
     @Id
     @GeneratedValue
     private UUID id;
-    private UUID user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userId;
     private String reason;
     private BigDecimal changed_value;
     private Date timestamp;

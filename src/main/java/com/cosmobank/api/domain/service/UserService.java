@@ -60,4 +60,22 @@ public class UserService {
                 return ResponseEntity.badRequest().body("Not valid type of key");
         }
     }
+    public ResponseEntity activateEmailKeyPix(UUID userId){
+        UserEntity userEntity = this.userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
+
+        userEntity.setEmail_key_pix(Boolean.TRUE);
+        return ResponseEntity.ok("Key activated");
+    }
+    public ResponseEntity activateCpfKeyPix(UUID userId){
+        UserEntity userEntity = this.userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
+
+        userEntity.setCpf_key_pix(Boolean.TRUE);
+        return ResponseEntity.ok("Key activated");
+    }
+    public ResponseEntity activateNumberKeyPix(UUID userId){
+        UserEntity userEntity = this.userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
+
+        userEntity.setNumber_key_pix(Boolean.TRUE);
+        return ResponseEntity.ok("Key activated");
+    }
 }

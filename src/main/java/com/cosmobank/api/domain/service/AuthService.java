@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class AuthService {
         UserEntity userEntity = this.userRepository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
         if (passwordEncoder.matches(body.password(), userEntity.getPassword())) {
             String token = this.tokenService.generateToken(userEntity);
-            return ResponseEntity.ok(new TokenResponseDTO(userEntity.getId(), token));
+            return ResponseEntity.ok(new TokenResponseDTO(userEntity.getEmail(), token));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -43,8 +44,8 @@ public class AuthService {
             newUserEntity.setBalance(new BigDecimal("0"));
             newUserEntity.setGeneral_score(500);
             newUserEntity.setBank_score(700);
-            newUserEntity.setUpdate_date(new Date(body.date()));
-            newUserEntity.setCreation_date(new Date(body.date()));
+            newUserEntity.setUpdate_date(Date.from(actualTimestamp()));
+            newUserEntity.setCreation_date(Date.from(actualTimestamp()));
             newUserEntity.setImage_filename("");
             newUserEntity.setCpf_key_pix(false);
             newUserEntity.setEmail_key_pix(false);
@@ -52,9 +53,13 @@ public class AuthService {
             this.userRepository.save(newUserEntity);
 
             String token = this.tokenService.generateToken(newUserEntity);
-            return ResponseEntity.ok(new TokenResponseDTO(newUserEntity.getId(), token));
+            return ResponseEntity.ok(new TokenResponseDTO(newUserEntity.getEmail(), token));
         }
         return ResponseEntity.badRequest().body("Email already exists in database");
+    }
+
+    private Instant actualTimestamp() {
+        return Instant.now();
     }
 
 }

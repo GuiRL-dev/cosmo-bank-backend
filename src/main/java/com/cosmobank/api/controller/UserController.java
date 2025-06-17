@@ -15,9 +15,9 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/get/{userid}")
-    public ResponseEntity getUser(@PathVariable UUID userid){
-        return userService.getUser(userid);
+    @GetMapping("/get")
+    public ResponseEntity getUser(@RequestBody String useremail){
+        return userService.getUser(useremail);
     }
 
     @GetMapping("/getbypix")

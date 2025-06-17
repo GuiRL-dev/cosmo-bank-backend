@@ -17,8 +17,8 @@ import java.util.UUID;
 public class UserService {
     private final UserRepository userRepository;
 
-    public ResponseEntity getUser(UUID userid){
-        UserEntity userEntity = this.userRepository.findById(userid).orElseThrow(() -> new RuntimeException("User not found"));
+    public ResponseEntity getUser(String useremail){
+        UserEntity userEntity = this.userRepository.findByEmail(useremail).orElseThrow(() -> new RuntimeException("User not found"));
 
         String userName = userEntity.getName();
         String userCPF = userEntity.getCpf();

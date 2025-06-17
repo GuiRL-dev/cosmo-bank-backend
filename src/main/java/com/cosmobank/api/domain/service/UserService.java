@@ -33,24 +33,26 @@ public class UserService {
         return ResponseEntity.ok(new GetUserResponseDTO(userName, userCPF, userMail, userNumber, userBalance, userGeneralScore, userCPFKey, userEmailKey, userNumberKey));
     }
 
-    public ResponseEntity getPixUser(GetUserByPixRequestDTO body){
-        switch (body.KeyType()) {
+    public ResponseEntity getPixUser(String usernumber){
+        String pixkey = "number";
+
+        switch (pixkey) {
             case "email": {
-                UserEntity userEntity = this.userRepository.findByEmail(body.KeyPix()).orElseThrow(() -> new RuntimeException("user not found"));
+                UserEntity userEntity = this.userRepository.findByEmail(usernumber).orElseThrow(() -> new RuntimeException("user not found"));
                 if (userEntity.getEmail_key_pix()) {
                     return ResponseEntity.badRequest().body("Unregistered key");
                 }
                 return ResponseEntity.ok(new GetUserByPixResponseDTO(userEntity.getName(), userEntity.getCpf()));
             }
             case "cpf": {
-                UserEntity userEntity = this.userRepository.findByCpf(body.KeyPix()).orElseThrow(() -> new RuntimeException("user not found"));
+                UserEntity userEntity = this.userRepository.findByCpf(usernumber).orElseThrow(() -> new RuntimeException("user not found"));
                 if (userEntity.getCpf_key_pix()) {
                     return ResponseEntity.badRequest().body("Unregistered key");
                 }
                 return ResponseEntity.ok(new GetUserByPixResponseDTO(userEntity.getName(), userEntity.getCpf()));
             }
             case "number": {
-                UserEntity userEntity = this.userRepository.findByNumber(body.KeyPix()).orElseThrow(() -> new RuntimeException("user not found"));
+                UserEntity userEntity = this.userRepository.findByNumber(usernumber).orElseThrow(() -> new RuntimeException("user not found"));
                 if (userEntity.getNumber_key_pix()) {
                     return ResponseEntity.badRequest().body("Unregistered key");
                 }

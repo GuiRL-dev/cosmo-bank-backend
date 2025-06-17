@@ -15,14 +15,14 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/get")
-    public ResponseEntity getUser(@RequestBody String useremail){
+    @GetMapping("/get/{useremail:.+}")
+    public ResponseEntity getUser(@PathVariable String useremail){
         return userService.getUser(useremail);
     }
 
-    @GetMapping("/getbypix")
-    public ResponseEntity getUserByPix(@RequestBody GetUserByPixRequestDTO body){
-        return userService.getPixUser(body);
+    @GetMapping("/getbypix/{usernumber}")
+    public ResponseEntity getUserByPix(@PathVariable String usernumber){
+        return userService.getPixUser(usernumber);
     }
 
     @PostMapping("/activatekey/email/{userid}")

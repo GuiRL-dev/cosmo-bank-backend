@@ -41,7 +41,7 @@ public class AuthService {
             newUserEntity.setName(body.name());
             newUserEntity.setCpf(body.cpf());
             newUserEntity.setNumber(body.number());
-            newUserEntity.setBalance(new BigDecimal("0"));
+            newUserEntity.setBalance(new BigDecimal("100"));
             newUserEntity.setGeneral_score(500);
             newUserEntity.setBank_score(700);
             newUserEntity.setUpdate_date(Date.from(actualTimestamp()));
